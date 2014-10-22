@@ -9,7 +9,18 @@
 
 class LibExcel extends WireData implements Module {
 
-  public $php_excel;
+  /**
+   * PHPExcel object
+   * @var PHPExcel
+   */
+  private $php_excel = null;
+
+  /** @var array widths of columns */
+  private $table_columns = [];
+  /** @var array list of header titles */
+  private $table_headers = [];
+  /** @var array data (rows of columns) */
+  private $table_data = [];
 
   public static function getModuleInfo() {
     return array(
@@ -22,12 +33,61 @@ class LibExcel extends WireData implements Module {
 
   /**
    * Module initialization (required)
-   * @return PHPExcel
+   * @return LibExcel
    */
   public function init() {
     require_once 'vendor/autoload.php';
 
     $this->php_excel = new PHPExcel();
+    return $this;
+  }
+
+  /**
+   * Use full PHPExcel object instead of simple interface
+   * @return PHPExcel
+   */
+  public function get_php_excel() {
     return $this->php_excel;
   }
+
+  /**
+   * "Magic" setter — simple typecasting for some properties
+   * @param string $name
+   * @param mixed $value
+   */
+  public function __set($name, $value) {
+    if (in_array($name, ['table_columns', 'table_headers', 'table_data']) && !is_array($value)){
+      throw new Exception("Property {$name} has to be set to array, ".gettype($value)." given");
+    }else{
+      $this->$name = $value;
+    }
+  }
+
+  /**
+   * "Magic" getter
+   * @param  string $name
+   * @return mixed
+   */
+  public function __get($name) {
+    return $this->$name;
+  }
+
+  // TODO: Do this.
+  /**
+   * Save file
+   * @param  string $mode
+   * @param  string $filename
+   * @return boolean
+   */
+  // public function render($mode, $filename) {
+  //   if (in_array($mode, ['b','browser'])){
+  //     switch ($mode) {
+  //       case 'b': case 'browser':
+  //       break;
+  //       case ''
+  //     }
+  //   }else{
+  //     throw new Exception('')
+  //   }
+  // }
 }

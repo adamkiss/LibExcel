@@ -8,10 +8,14 @@ This is a ProcessWire wrapper for the [PHPExcel](https://github.com/PHPOffice/PH
   // example: usage from other modules
   $excel = $this->modules->get('LibExcel'); 
   
-  // …your code, $excel is now your new PHPExcel document
+  //Let's use 'simple mode' to export simple table
+  $excel->table_columns = [15, 20, 15]; //set column width
+  $excel->table_headers = ['Column 1', 'Column 2', 'Column 3'];
+  $excel->table_data = $prepared_table_data; //two dimensional array
+  $excel->render('browser', 'excel-filename.xls'); //output to browser
 
-  // alternatively, switch to simple mode
-  $excel->set_simple_mode();
+  // alternatively, use PHPExcel object for advanced things
+  $php_excel = $excel->get_php_excel();
 ```
 
 ## License
