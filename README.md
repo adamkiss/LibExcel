@@ -6,7 +6,7 @@ This is a ProcessWire wrapper for the [PHPExcel](https://github.com/PHPOffice/PH
 
 ``` php
   // example: usage from other modules
-  $excel = $this->modules->get('LibraryExcel'); 
+  $excel = $this->modules->get('LibExcel'); 
   
   // …your code, $excel is now your new PHPExcel document
 
