@@ -1,4 +1,4 @@
-# Excel for ProcessWire v0.0.0
+# Excel for ProcessWire v0.0.1
 
 This is a ProcessWire wrapper for the [PHPExcel](https://github.com/PHPOffice/PHPExcel). In addition to including the PHPExcel, it also includes few functions for generating very simple excel tables (think: outputting a two dimensional array into excel file).
 

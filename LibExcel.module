@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * PHPExcel wrapper for ProcessWire
+ *
+ * @author Adam Kiss - http://adamkiss.com/ (author of the wrapper)
+ * @author PHPOffice - https://github.com/PHPOffice (author of the PHPExcel package)
+**/
+
+class LibExcel extends WireData implements Module {
+
+  public $php_excel;
+
+  public static function getModuleInfo() {
+    return array(
+      'title' => 'Excel for ProcessWire',
+      'version' => 001,
+      'summary' => 'Read and Write spreadsheetfiles',
+      'autoload' => false
+    );
+  }
+
+  /**
+   * Module initialization (required)
+   * @return PHPExcel
+   */
+  public function init() {
+    require_once 'vendor/autoload.php';
+
+    $this->php_excel = new PHPExcel();
+    return $this->php_excel;
+  }
+}
